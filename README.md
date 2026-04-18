@@ -75,8 +75,8 @@ cd apple-10k-rag
 pip install -r requirements.txt
 3. Configuration
 Add your keys to a .env file:
-*Code snippet*
 ```
+# Code snippet
 GROQ_API_KEY=your_key
 MONGO_URI=your_mongodb_atlas_uri
 LLAMA_CLOUD_API_KEY=your_parse_key
