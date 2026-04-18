@@ -75,8 +75,7 @@ GROQ_API_KEY=your_key
 MONGO_URI=your_mongodb_atlas_uri
 LLAMA_CLOUD_API_KEY=your_parse_key
 4. Execution
-Bash
-python main.py
+Doubleclick *run.bat*
 
 
 ## 🎓 Lessons Learned 👨‍🎓
