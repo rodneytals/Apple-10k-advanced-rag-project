@@ -42,19 +42,24 @@ All nodes (including parent nodes) are properly persisted in MongoDocumentStore.
 - **FlashRank reranker** as the final quality gate as it uses cross-encoding to produce final scores to chunks before they are sent to the LLM
 
 
-## 📂 Project Structure 🗼
+## 📂 Project Structure
+
+```
+
 advanced-RAG-month1/
 ├── src/
 │   ├── config.py          # LLM, embedding model & MongoDB Atlas configuration
-│   ├── ingestion.py       # contains text sanitization, parsing & hierarchical node creation
-│   └── retrieval.py       # contains the Auto-merging, step-back prompting & reranking logic
+│   ├── ingestion.py       # Text sanitization, parsing & hierarchical node creation
+│   └── retrieval.py       # Auto-merging, step-back prompting & reranking logic
 ├── data/
 │   └── 10-K.Apple.pdf     # Source Apple 10-K document
 ├── main.py                # Main orchestrator and entry point
-├── run.bat                # for easy launching on Windows as recommended
-├── .env                   # contains environment variables (API keys)
-└── requirements.txt       # contains the project dependencies
-⚡Quick Start⚡
+├── run.bat                # Easy launcher for Windows (recommended)
+├── README.md
+├── requirements.txt       # Project dependencies
+├── .env                   # Environment variables (API keys - not committed)
+└── .gitignore
+ ```
 
 1. **Prerequisites**
 Python 3.10+
@@ -71,10 +76,12 @@ pip install -r requirements.txt
 3. Configuration
 Add your keys to a .env file:
 *Code snippet*
+```
 GROQ_API_KEY=your_key
 MONGO_URI=your_mongodb_atlas_uri
 LLAMA_CLOUD_API_KEY=your_parse_key
-4. Execution
+```
+5. Execution
 Doubleclick *run.bat*
 
 
@@ -96,5 +103,5 @@ Doubleclick *run.bat*
 - The frontier (GraphRAG and production) *month 4* 
 
 ☎️Contact
- Third-Year Engineering Student | AI Developer LinkedIn | Portfolio | Twitter
+ Third-Year Engineering Student | AI Developer | https://x.com/talemwa_rodney | www.linkedin.com/in/rodney-mubiru-talemwa-22727321b
 
