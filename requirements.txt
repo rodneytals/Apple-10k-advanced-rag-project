@@ -1,0 +1,28 @@
+# Core LlamaIndex Framework
+llama-index
+
+# LLM & Embeddings
+llama-index-llms-groq
+llama-index-llms-huggingface
+llama-index-embeddings-huggingface
+sentence-transformers
+
+# PDF Parsing
+llama-parse
+
+# MongoDB Atlas Persistence
+pymongo
+llama-index-vector-stores-mongodb
+llama-index-storage-docstore-mongodb
+
+# Advanced Retrieval Components
+llama-index-postprocessor-flashrank-rerank
+llama-index-postprocessor-metadata-replacement
+
+# Utilities
+python-dotenv
+nest-asyncio
+tqdm
+
+# Optional but recommended for stability
+hf_transfer
