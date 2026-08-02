@@ -1,12 +1,12 @@
-# Day 11 — Teaching the System to Catch Its Own Mistakes
+# Day 11. Teaching the System to Catch Its Own Mistakes
 
 ## What problem was I solving today?
 
-Every system you've built so far trusted two things without question: that its search actually found the right information, and that its answer actually used that information correctly. Day 11 stopped trusting both. You built two independent safety checks — one that runs *before* the answer is written (checking whether the search results were even good enough to use), and one that runs *after* (checking whether the written answer actually matches what was found). Think of it like a kitchen with two separate inspections: one checking the ingredients before cooking starts, one checking the finished dish before it leaves the kitchen.
+Every system you've built so far trusted two things without question: that its search actually found the right information, and that its answer actually used that information correctly. Day 11 stopped trusting both. You built two independent safety checks. one that runs *before* the answer is written (checking whether the search results were even good enough to use), and one that runs *after* (checking whether the written answer actually matches what was found). Think of it like a kitchen with two separate inspections: one checking the ingredients before cooking starts, one checking the finished dish before it leaves the kitchen.
 
 ## What did I actually type, and what does it mean?
 
-**Cell 2 — Turning a search result into a trust score**
+**Cell 2. Turning a search result into a trust score**
 ```python
 RELEVANCE_THRESHOLD = 0.5
 
@@ -19,7 +19,7 @@ def retrieve_with_confidence(query: str) -> tuple[list, float]:
     print(f"📣 Top retrieval score : {top_score:.3f} (threshold: {RELEVANCE_THRESHOLD})")
     return results, top_score
 ```
-Every result your vector search returns comes with a **similarity score** — a number describing how closely that piece of text matches your question, mathematically. `top_score` grabs the score of the very best result. This function does no thinking at all, it's pure arithmetic — which is exactly why it belongs *before* the expensive step of actually generating an answer. It's much cheaper to check a number than to run a whole AI generation and then discover the search was bad all along.
+Every result your vector search returns comes with a **similarity score**  a number describing how closely that piece of text matches your question, mathematically. `top_score` grabs the score of the very best result. This function does no thinking at all, it's pure arithmetic which is exactly why it belongs *before* the expensive step of actually generating an answer. It's much cheaper to check a number than to run a whole AI generation and then discover the search was bad all along.
 
 **Cell 3 — Corrective RAG: the cheap gate that runs first**
 ```python
@@ -34,7 +34,7 @@ def corrective_retrieve(query: str) -> tuple[str, str]:
         print("👍 CRAG: Retrieval confidence acceptable - using local docs")
         return format_chunks(docs), "local"
 ```
-This is a single `if` statement doing genuinely important work: if the best match your own documents could offer scores below 0.5 (out of a possible 1.0), the system doesn't even try to answer from your documents — it assumes they probably don't contain what's needed and automatically switches to a live web search instead. This is "Corrective RAG" (often shortened to CRAG) — instead of blindly trusting whatever came back from search, the system checks first whether that search was even worth trusting.
+This is a single `if` statement doing genuinely important work: if the best match your own documents could offer scores below 0.5 (out of a possible 1.0), the system doesn't even try to answer from your documents. it assumes they probably don't contain what's needed and automatically switches to a live web search instead. This is "Corrective RAG" (often shortened to CRAG) , instead of blindly trusting whatever came back from search, the system checks first whether that search was even worth trusting.
 
 **Cell 4 — The generator, and a real, deliberate model swap**
 ```python
@@ -47,7 +47,7 @@ def generate_answer(question: str, context: str, critique: str = "") -> str:
 ```
 Worth calling out honestly: from this cell onward, the generator switched to a different model — `openai/gpt-oss-120b` — instead of the `llama-3.3-70b-versatile` model used everywhere up to this point. Groq hosts several different AI models, and this is a real, deliberate experiment worth noticing: different models can have different strengths, and part of building real systems is being willing to try alternatives rather than assuming your first choice is automatically the best one forever.
 
-**Cell 5 — The Reviewer: a second AI checking the first AI's work**
+**Cell 5. The Reviewer: a second AI checking the first AI's work**
 ```python
 def review_answer(question: str, context: str, answer: str) -> tuple[str, str]:
     response = client.chat.completions.create(
@@ -76,7 +76,7 @@ if answer and "I cannot find sufficient information" in answer and source == "lo
     source = "web"
     answer = generate_answer(question, context= context)
 ```
-This is worth pointing out specifically because it wasn't part of the original plan — it's a genuine improvement made while actually building the system. Here's the problem it solves: sometimes the *similarity score* looks confidently high, but the actual retrieved text still doesn't contain what's needed (a "false positive" — the math said "trust this," but the content didn't deliver). This extra check catches that specific gap: if the local documents scored high enough to be trusted, but the model still ended up saying "I cannot find sufficient information," that's a signal the score lied, and the system automatically tries the web instead of just giving up.
+This is worth pointing out specifically because it wasn't part of the original plan. it's a genuine improvement made while actually building the system. Here's the problem it solves: sometimes the *similarity score* looks confidently high, but the actual retrieved text still doesn't contain what's needed (a "false positive", the math said "trust this," but the content didn't deliver). This extra check catches that specific gap: if the local documents scored high enough to be trusted, but the model still ended up saying "I cannot find sufficient information," that's a signal the score lied, and the system automatically tries the web instead of just giving up.
 
 **Cell 6 continued — the rewrite loop, capped so it can't run forever**
 ```python
@@ -91,11 +91,11 @@ while verdict == 'FAIL' and attempts < max_rewrites:
         else:
             print("🤥 Max rewrites reached - returning best attempt with warning")
 ```
-If the Reviewer says `FAIL`, the system doesn't just give up or crash — it sends the answer back to be rewritten, this time including the Reviewer's specific critique, so the second attempt has a real chance to fix the exact problem that was flagged. `max_rewrites = 2` is the safety cap — the same defensive pattern you've now seen multiple times (Day 6's tool retries, Day 8's step limit): always put a hard ceiling on any loop that depends on an AI deciding when to stop.
+If the Reviewer says `FAIL`, the system doesn't just give up or crash, it sends the answer back to be rewritten, this time including the Reviewer's specific critique, so the second attempt has a real chance to fix the exact problem that was flagged. `max_rewrites = 2` is the safety cap. the same defensive pattern you've now seen multiple times (Day 6's tool retries, Day 8's step limit): always put a hard ceiling on any loop that depends on an AI deciding when to stop.
 
 ## What actually happened when I ran it
 
-Three real questions were tested, and the results were genuinely strong. Question 1 — comparing FY2024 and FY2023 net sales — scored a retrieval confidence of **0.875** (comfortably above the 0.5 threshold), generated a correct answer on the first try, and the Reviewer confirmed **PASS** immediately, with zero rewrites needed:
+Three real questions were tested, and the results were genuinely strong. Question 1 — comparing FY2024 and FY2023 net sales  scored a retrieval confidence of **0.875** (comfortably above the 0.5 threshold), generated a correct answer on the first try, and the Reviewer confirmed **PASS** immediately, with zero rewrites needed:
 ```
 Apple's total net sales were $391,035 million for fiscal year 2024.
 For fiscal year 2023, total net sales were $383,285 million.
@@ -104,7 +104,7 @@ representing an increase of roughly 2% year-over-year.
 ```
 Question 2, about macroeconomic risk factors, scored 0.833 confidence and also passed on the first try, correctly citing specific real figures from the document (a $2,755 million portfolio impact from a hypothetical rate rise, and a $139 million interest expense change).
 
-Question 3 was the real test of the CRAG fallback — asking for Apple's *current* stock price, something no 10-K filing could ever contain. The system correctly recognized this, automatically switched `retrieval_source` to `"web"`, and returned a real, current answer: **$282.50 per share, roughly $4.168 trillion market capitalization** — genuinely live information the local documents could never have supplied. All three questions passed with **zero rewrites needed** — a genuinely clean run.
+Question 3 was the real test of the CRAG fallback, asking for Apple's *current* stock price, something no 10-K filing could ever contain. The system correctly recognized this, automatically switched `retrieval_source` to `"web"`, and returned a real, current answer: **$282.50 per share, roughly $4.168 trillion market capitalization**, genuinely live information the local documents could never have supplied. All three questions passed with **zero rewrites needed**  a genuinely clean run.
 
 ## The flow of Day 11
 
@@ -129,4 +129,4 @@ graph TD
 
 ## Why this mattered for later days
 
-Two different kinds of "wrong" got two different kinds of check today: a bad *search* is caught cheaply with a number (CRAG), and a bad *answer* is caught expensively with real reasoning (the Reviewer). This exact two-layer thinking — a fast, cheap check first, a slower, smarter check second — becomes the backbone of the router you build on Day 12 (which decides how much of this expensive machinery a question actually deserves) and the 20-question audit on Day 13 (which finally measures, with real numbers, how often each layer actually catches something).
+Two different kinds of "wrong" got two different kinds of check today: a bad *search* is caught cheaply with a number (CRAG), and a bad *answer* is caught expensively with real reasoning (the Reviewer). This exact two-layer thinking. a fast, cheap check first, a slower, smarter check second becomes the backbone of the router you build on Day 12 (which decides how much of this expensive machinery a question actually deserves) and the 20-question audit on Day 13 (which finally measures, with real numbers, how often each layer actually catches something).
