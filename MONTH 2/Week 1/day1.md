@@ -1,4 +1,4 @@
-# Day 1 — Teaching a Computer to "See" a Function
+# Day 1 was about Teaching a Computer to "See" a Function
 
 ## What problem was I solving today?
 
