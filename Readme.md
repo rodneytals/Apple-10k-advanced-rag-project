@@ -9,7 +9,7 @@ A self-directed AI/ML engineering curriculum, built month by month around one ru
 | | Focus |
 |---|---|
 | [**MONTH 1**](./MONTH%201) | The core RAG pipeline: It handles many things including Auto-Merging Retrieval, step back prompting and MongoDB Atlas vector search among others over Apple's 10-K filings. |
-| [**MONTH 2**](./MONTH%202) | Turning that pipeline into an agent: Handles tool use, hand-built reasoning, a LangGraph state machine, and four layers of memory. (./MONTH%202/My%20Month%202%20Journey.pdf) for the full day-by-day write-up. |
+| [**MONTH 2**](./MONTH%202) | Turning that pipeline into an agent: Handles tool use, hand-built reasoning, a LangGraph state machine, and four layers of memory. |
 
 Each month's folder contains its own README with more detail.
 
