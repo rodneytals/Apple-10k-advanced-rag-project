@@ -1,4 +1,4 @@
-# Day 21 — Remembering What Was Just Said
+# Day 21. Remembering What Was Just Said
 
 ## What problem was I solving today?
 
