@@ -38,7 +38,7 @@ Nothing here was scripted to look clean. A few real things worth knowing before 
 
 - **Day 13's audit initially scored 0 out of 20** not because the system didn't work, but because of a one-letter capitalization mismatch between two files. Finding it is exactly why the audit was built.
 - **Day 22's fact-memory once saved the literal word "YES"** as a "fact" about the user, due to a regex quietly matching inside its own label. It's explained in full in `Week 4/day22.md`.
-- **Day 25 ends with a real, independently-judged 3-out-of-3 pass** on a recall test that gave the system zero hints — proof the four memory layers built across the week genuinely work together.
+- **Day 25 ends with a real, independently-judged 3-out-of-3 pass** on a recall test that gave the system zero hints, proof the four memory layers built across the week genuinely work together.
 
 ---
 
