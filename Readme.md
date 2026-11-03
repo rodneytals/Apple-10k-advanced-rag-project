@@ -4,7 +4,7 @@ A self-directed AI/ML engineering curriculum, built month by month around one ru
 
 ---
 
-## The project so far
+## The full project summary
 
 | | Focus |
 |---|---|
