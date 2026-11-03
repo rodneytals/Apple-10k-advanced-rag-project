@@ -1,0 +1,2 @@
+# PyTorch CPU build, installed first from the PyTorch CPU index (see Dockerfile).
+torch==2.10.0

@@ -1,0 +1,279 @@
+{
+ "probe": {
+  "graphs": {
+   "multihop_graph": {
+    "nodes": [
+     "__end__",
+     "__start__",
+     "check_sufficiency_node",
+     "classify_node",
+     "decompose_and_retrieve_node",
+     "error_log_node",
+     "extract_facts_node",
+     "extract_graph_entity_node",
+     "fallback_generate_node",
+     "generate_node",
+     "load_profile_node",
+     "output_validation_node",
+     "rate_limit_check_node",
+     "reformulate_node",
+     "retrieve_node",
+     "review_node",
+     "rewrite_node",
+     "save_graph_entity_node",
+     "save_memory_node",
+     "save_profile_node",
+     "summarize_and_trim_node",
+     "visual_retrieve_node"
+    ],
+    "edges": [
+     [
+      "__start__",
+      "rate_limit_check_node",
+      false
+     ],
+     [
+      "check_sufficiency_node",
+      "generate_node",
+      true
+     ],
+     [
+      "check_sufficiency_node",
+      "reformulate_node",
+      true
+     ],
+     [
+      "classify_node",
+      "decompose_and_retrieve_node",
+      true
+     ],
+     [
+      "classify_node",
+      "retrieve_node",
+      true
+     ],
+     [
+      "classify_node",
+      "visual_retrieve_node",
+      true
+     ],
+     [
+      "decompose_and_retrieve_node",
+      "generate_node",
+      false
+     ],
+     [
+      "error_log_node",
+      "fallback_generate_node",
+      false
+     ],
+     [
+      "extract_facts_node",
+      "save_profile_node",
+      false
+     ],
+     [
+      "extract_graph_entity_node",
+      "save_graph_entity_node",
+      false
+     ],
+     [
+      "fallback_generate_node",
+      "review_node",
+      false
+     ],
+     [
+      "generate_node",
+      "error_log_node",
+      true
+     ],
+     [
+      "generate_node",
+      "review_node",
+      true
+     ],
+     [
+      "load_profile_node",
+      "classify_node",
+      false
+     ],
+     [
+      "output_validation_node",
+      "save_memory_node",
+      false
+     ],
+     [
+      "rate_limit_check_node",
+      "__end__",
+      true
+     ],
+     [
+      "rate_limit_check_node",
+      "load_profile_node",
+      true
+     ],
+     [
+      "reformulate_node",
+      "retrieve_node",
+      false
+     ],
+     [
+      "retrieve_node",
+      "check_sufficiency_node",
+      false
+     ],
+     [
+      "review_node",
+      "output_validation_node",
+      true
+     ],
+     [
+      "review_node",
+      "rewrite_node",
+      true
+     ],
+     [
+      "rewrite_node",
+      "generate_node",
+      false
+     ],
+     [
+      "save_graph_entity_node",
+      "__end__",
+      false
+     ],
+     [
+      "save_memory_node",
+      "summarize_and_trim_node",
+      false
+     ],
+     [
+      "save_profile_node",
+      "extract_graph_entity_node",
+      false
+     ],
+     [
+      "summarize_and_trim_node",
+      "extract_facts_node",
+      false
+     ],
+     [
+      "visual_retrieve_node",
+      "check_sufficiency_node",
+      false
+     ]
+    ],
+    "node_code": {
+     "__start__": {
+      "ast": null,
+      "weak": "e216d00fee62"
+     },
+     "rate_limit_check_node": {
+      "ast": "d9d49d0dd52d",
+      "weak": "53cd04f207ab"
+     },
+     "load_profile_node": {
+      "ast": "a4ac9c0fc69c",
+      "weak": "4492c99b8a4c"
+     },
+     "classify_node": {
+      "ast": "3a47730974e3",
+      "weak": "d0d5ba292a68"
+     },
+     "retrieve_node": {
+      "ast": "2f76104d6547",
+      "weak": "84b29c5c8cd8"
+     },
+     "visual_retrieve_node": {
+      "ast": "bb351cf87f78",
+      "weak": "698767f7e271"
+     },
+     "decompose_and_retrieve_node": {
+      "ast": "4bdb832cfcfb",
+      "weak": "2927d96667b1"
+     },
+     "check_sufficiency_node": {
+      "ast": "0b2988c6d6c6",
+      "weak": "719e7c8950ca"
+     },
+     "reformulate_node": {
+      "ast": "7147d11dfeb1",
+      "weak": "798bdc326cf8"
+     },
+     "generate_node": {
+      "ast": "ccf61f983dcd",
+      "weak": "b96f76de5b37"
+     },
+     "error_log_node": {
+      "ast": "714d99316e8a",
+      "weak": "8e7a333223e5"
+     },
+     "fallback_generate_node": {
+      "ast": "c5baba76cb16",
+      "weak": "bbaf0c616472"
+     },
+     "review_node": {
+      "ast": "83f377974eb0",
+      "weak": "eebe8d217b6c"
+     },
+     "rewrite_node": {
+      "ast": "6ec910fc3dde",
+      "weak": "35e05e863714"
+     },
+     "output_validation_node": {
+      "ast": "45f410c2ed9e",
+      "weak": "e30ac3ac005a"
+     },
+     "save_memory_node": {
+      "ast": "fd668abbd3f7",
+      "weak": "61aaf3d97070"
+     },
+     "summarize_and_trim_node": {
+      "ast": "9894e31f9f9c",
+      "weak": "ccb63463eb44"
+     },
+     "extract_facts_node": {
+      "ast": "741b48a120a9",
+      "weak": "ec701ed1e501"
+     },
+     "save_profile_node": {
+      "ast": "582e1d71ffd1",
+      "weak": "537bd3dc29a2"
+     },
+     "extract_graph_entity_node": {
+      "ast": "b6c16e8e2d14",
+      "weak": "4b4a2a985826"
+     },
+     "save_graph_entity_node": {
+      "ast": "a7225daf3e9a",
+      "weak": "f48f257f9715"
+     }
+    }
+   }
+  },
+  "calls": {
+   "retrieve_with_confidence": {
+    "result": [
+     [
+      "# Net sales disaggregated by significant products and services for 2024, 2023 an",
+      "# Net sales disaggregated by significant products and services for 2024, 2023 an",
+      "200    | 9 %    | 78,129    |\n| Total net sales                 | $ 391,035 | 2 ",
+      "\nProducts and Services Performance\n\nThe following table shows net sales by categ"
+     ],
+     0.8661
+    ]
+   }
+  }
+ },
+ "graph_names": [
+  "multihop_graph"
+ ],
+ "probe_calls": [
+  [
+   "retrieve_with_confidence",
+   [
+    "What was Apple's total net sales for fiscal year 2024?"
+   ]
+  ]
+ ]
+}

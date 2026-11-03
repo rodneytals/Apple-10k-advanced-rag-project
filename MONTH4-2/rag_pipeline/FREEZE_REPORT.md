@@ -1,0 +1,177 @@
+# Freeze report
+
+Frozen 142 statements from 34 executed cells -> rag_pipeline/pipeline.py
+   52 functions, 2 classes, 61 objects/constants, 24 imports
+UNRESOLVED names (used by the pipeline, defined by no cell you ran):
+   - embedder   (used by: if "embedder" not in globals():)
+   - f   (used by: with open(INDEX_PATH) as f:)
+   - group   (used by: for group, qs in (("in scope", CAL_IN_SC)
+   - q   (used by: for group, qs in (("in scope", CAL_IN_SC)
+   - qs   (used by: for group, qs in (("in scope", CAL_IN_SC)
+   - r   (used by: VISUAL_MATRIX = np.array([r["embedding"])
+   - rec   (used by: for group, qs in (("in scope", CAL_IN_SC)
+   - s   (used by: for group, qs in (("in scope", CAL_IN_SC)
+Configuration side effects kept (check they are wanted):
+   - cell 1: Settings.embed_model = HuggingFaceEmbedding(
+   - cell 1: load_dotenv(find_dotenv())
+Top-level calls left behind (1); review the ones that set something up:
+   - cell 1: profiles_collection.create_index("user_id")
+Environment variables the package reads: MONGO_URI, NEO4J_PASSWORD, NEO4J_URI, NEO4J_USERNAME
+File paths inside the code (these must exist wherever the package runs):
+   - line 44: BAAI/bge-m3
+   - line 102: openai/gpt-oss-120b
+   - line 480: checkpoints/rag_checkpoints.db
+   - line 508: /api/chat
+   - line 537: /api/tags
+   - line 1202: new\s+instructions?\\s*:
+   - line 1254: day14_visual_index.json
+   - line 1258: BAAI/bge-m3
+WARNING: circular import-time dependency near: in_scores = [best_visual_match(q)[1] for q in CAL_IN_SCOPE] (kept in original order)
+WARNING: circular import-time dependency near: out_scores = [best_visual_match(q)[1] for q in CAL_CHART_NOT_INDEXED] (kept in original order)
+WARNING: `in_scores = [best_visual_match(q)[1] for q in CAL_IN_SCOPE]` (cell 27) ran BEFORE `q` was last redefined (cell 27). Your kernel still holds the old result; the package rebuilds it from the newest `q`.
+WARNING: `out_scores = [best_visual_match(q)[1] for q in CAL_CHART_NOT` (cell 27) ran BEFORE `q` was last redefined (cell 27). Your kernel still holds the old result; the package rebuilds it from the newest `q`.
+
+## Everything that was kept (in file order)
+
+- cell 1: `from groq import Groq`
+- cell 1: `from dataclasses import dataclass, field, asdict`
+- cell 1: `from typing import Optional, TypedDict, Literal`
+- cell 1: `from langgraph.graph import StateGraph, END`
+- cell 1: `from dotenv import load_dotenv, find_dotenv`
+- cell 1: `from llama_index.core import Settings`
+- cell 1: `from llama_index.embeddings.huggingface import HuggingFaceEmbedding`
+- cell 1: `from llama_index.vector_stores.mongodb import MongoDBAtlasVectorSearch`
+- cell 1: `from llama_index.storage.docstore.mongodb import MongoDocumentStore`
+- cell 1: `from pymongo import MongoClient, AsyncMongoClient`
+- cell 1: `from llama_index.core import VectorStoreIndex, StorageContext`
+- cell 1: `from langchain_community.tools.tavily_search import TavilySearchResults`
+- cell 1: `Settings.embed_model = HuggingFaceEmbedding(`
+- cell 1: `load_dotenv(find_dotenv())`
+- cell 1: `client = Groq()`
+- cell 1: `webSearch = TavilySearchResults(max_results = 3)`
+- cell 1: `@dataclass`
+- cell 1: `usage_tracker = TokenUsage()`
+- cell 1: `def tracked_llm_call(messages: list, system: str = "") -> str:`
+- cell 1: `RELEVANCE_THRESHOLD = 0.5`
+- cell 1: `def retrieve_with_confidence(query: str) -> tuple[list, float]:`
+- cell 1: `def format_chunks(docs: list) -> str:`
+- cell 1: `GENERATOR_SYSTEM_PROMPT = """You are a precise financial analyst assistant.`
+- cell 1: `REVIEWER_SYSTEM_PROMPT = """You are a strict factual reviewer for a financial RAG system.`
+- cell 1: `ROUTER_SYSTEM_PROMPT = """You are a query complexity classifier for a financial RAG system`
+- cell 1: `import redis`
+- cell 1: `REDIS_HOST = "localhost"`
+- cell 1: `REDIS_PORT = 9379`
+- cell 1: `WINDOW_SIZE = 10`
+- cell 1: `redis_client = redis.Redis(`
+- cell 1: `def check_redis_available() -> bool:`
+- cell 1: `from pymongo import MongoClient`
+- cell 1: `from datetime import datetime`
+- cell 2: `class RAGState(TypedDict):`
+- cell 5: `from neo4j import GraphDatabase`
+- cell 10: `def classify_node(state: RAGState) -> dict:`
+- cell 10: `def review_node(state: RAGState) -> dict:`
+- cell 10: `def rewrite_node(state: RAGState) -> dict:`
+- cell 10: `def route_after_review(state: RAGState) -> Literal["rewrite_node", "__end__"]:`
+- cell 10: `def retrieve_node(state: RAGState) -> dict:`
+- cell 10: `SUFFICIENCY_SYSTEM_PROMPT = """You are a retrieval sufficiency checker for a financial RAG`
+- cell 10: `def check_sufficiency_node(state: RAGState) -> dict:`
+- cell 10: `REFORMULATE_SYSTEM_PROMPT = """You are a search query optimiser for a financial RAG system`
+- cell 10: `def reformulate_node(state: RAGState) -> dict:`
+- cell 10: `def route_after_sufficiency(state: RAGState) -> Literal["generate_node", "reformulate_node`
+- cell 10: `DB_PATH = "checkpoints/rag_checkpoints.db"`
+- cell 10: `OLLAMA_BASE_URL = "http://localhost:11434"`
+- cell 10: `OLLAMA_MODEL = "llama3.2:1b"`
+- cell 10: `import requests`
+- cell 10: `from groq import APITimeoutError, RateLimitError, APIConnectionError`
+- cell 10: `def call_ollama(messages: list, system: str = "") -> str:`
+- cell 10: `def check_ollama_available() -> bool:`
+- cell 10: `def error_log_node(state: RAGState) -> dict:`
+- cell 10: `def fallback_generate_node(state: RAGState) -> dict:`
+- cell 10: `def route_after_generate(`
+- cell 10: `FACT_EXTRACTOR_SYSTEM_PROMPT = """You are a fact extraction specialist.`
+- cell 10: `def extract_facts_node(state: RAGState) -> dict:`
+- cell 10: `DEDUP_SYSTEM_PROMPT = """You compare a NEW fact against a list of EXISTING facts about the`
+- cell 10: `def is_duplicate_fact(new_fact: str, existing_facts: list[dict]) -> bool:`
+- cell 10: `def save_profile_node(state: RAGState) -> dict:`
+- cell 10: `def save_memory_node(state: RAGState) -> dict:`
+- cell 10: `SUMMARY_SYSTEM_PROMPT = """You maintain a running summary of an ongoing conversation`
+- cell 10: `def summarize_and_trim_node(state: RAGState) -> dict:`
+- cell 11: `GRAPH_ENTITY_EXTRACTOR_PROMPT = """You identify a recurring ANALYSIS TOPIC in a conversati`
+- cell 11: `def extract_graph_entity(question: str, answer: str) -> Optional[dict]:`
+- cell 11: `def write_entity_to_graph(user_id: str, entity_name: str, entity_type: str, question: str)`
+- cell 12: `def extract_graph_entity_node(state: RAGState) -> dict:`
+- cell 12: `def save_graph_entity_node(state: RAGState) -> dict:`
+- cell 13: `def load_tracked_entities_from_graph(user_id: str) -> list[dict]:`
+- cell 13: `def load_profile_node(state: RAGState) -> dict:`
+- cell 14: `HARDENED_GENERATOR_SYSTEM_PROMPT = """You are a precise financial analyst assistant answer`
+- cell 15: `def generate_node(state: RAGState) -> dict:`
+- cell 16: `MULTIHOP_DETECTOR_PROMPT = """You detect whether a financial question requires combining`
+- cell 16: `def detect_multihop(question: str) -> bool:`
+- cell 17: `DECOMPOSER_PROMPT = """Break this multi-hop financial question into 2-3 independent`
+- cell 17: `def decompose_question(question: str) -> list[str]:`
+- cell 18: `def decompose_and_retrieve_node(state: RAGState) -> dict:`
+- cell 19: `RATE_LIMIT_MAX_REQUESTS = 10`
+- cell 19: `RATE_LIMIT_WINDOW_SECONDS = 60`
+- cell 19: `def check_rate_limit(user_id: str) -> tuple[bool, int]:`
+- cell 20: `SIMILARITY_WINDOW_SECONDS = 120`
+- cell 20: `SIMILARITY_FLAG_THRESHOLD = 3`
+- cell 20: `def check_repeated_question(user_id: str, question: str) -> bool:`
+- cell 21: `def rate_limit_check_node(state: RAGState) -> dict:`
+- cell 21: `def route_after_rate_limit(state: RAGState) -> Literal["load_profile_node", "__end__"]:`
+- cell 22: `PII_PATTERNS = {`
+- cell 22: `def detect_and_mask_pii(text: str) -> tuple[str, list[str]]:`
+- cell 23: `SUSPICIOUS_STRUCTURAL_PATTERNS = [`
+- cell 23: `def pattern_scan(chunk_text: str) -> bool:`
+- cell 24: `def validate_final_output(answer: str) -> tuple[str, list[str]]:`
+- cell 25: `def output_validation_node(state: RAGState) -> dict:`
+- cell 26: `from sentence_transformers import SentenceTransformer`
+- cell 26: `import numpy as np`
+- cell 26: `INDEX_PATH = "day14_visual_index.json"`
+- cell 26: `if "embedder" not in globals():`
+- cell 26: `def _embed_query(q: str):`
+- cell 27: `VISUAL_ROUTE_LOG = []`
+- cell 27: `VISUAL_SCORE_THRESHOLD = 0.650`
+- cell 27: `def best_visual_match(question: str):`
+- cell 27: `def visual_gate(question: str):`
+- cell 27: `CAL_IN_SCOPE = [`
+- cell 27: `CAL_CHART_NOT_INDEXED = [`
+- cell 27: `CAL_NO_KEYWORD = [`
+- cell 28: `MEMORY_POISONING_PATTERNS = SUSPICIOUS_STRUCTURAL_PATTERNS + [`
+- cell 28: `def pattern_scan_memory(text: str) -> bool:`
+- cell 28: `SCAN_JUDGE_PROMPT = """You are a strict security scanner checking retrieved document text `
+- cell 28: `def scan_chunk(chunk_text: str) -> dict:`
+- cell 28: `def scan_vision_text(text: str) -> dict:`
+- cell 28: `def build_context(rec: dict) -> str:`
+- cell 29: `import sqlite3`
+- cell 29: `from langgraph.checkpoint.sqlite import SqliteSaver`
+- cell 29: `def route_after_classify(state: RAGState) -> Literal["decompose_and_retrieve_node", "retri`
+- cell 29: `def visual_retrieve_node(state: RAGState) -> dict:`
+- cell 29: `def route_after_classify_visual(state: RAGState):`
+- cell 29: `def build_visual_routed_graph(db_path: str = DB_PATH):`
+- cell 30: `import uuid`
+- cell 30: `def run_with_entity_memory(question: str, session_id: str, user_id: str) -> RAGState:`
+- cell 32: `import os, sys, subprocess, time, json, secrets, pathlib, re`
+- cell 1: `mongoClient = MongoClient(os.getenv('MONGO_URI'))`
+- cell 1: `asyncMongoClient = AsyncMongoClient(os.getenv('MONGO_URI'))`
+- cell 1: `docstore = MongoDocumentStore.from_uri(`
+- cell 1: `vectorStore = MongoDBAtlasVectorSearch(`
+- cell 1: `storageContext = StorageContext.from_defaults(`
+- cell 1: `index = VectorStoreIndex.from_vector_store(`
+- cell 1: `mongo_client = MongoClient(os.getenv("MONGO_URI"))`
+- cell 1: `profile_db = mongo_client["user_memory"]`
+- cell 1: `profiles_collection = profile_db["user_profiles"]`
+- cell 5: `NEO4J_URI = os.getenv("NEO4J_URI")`
+- cell 5: `NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")`
+- cell 5: `NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")`
+- cell 5: `neo4j_driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))`
+- cell 26: `with open(INDEX_PATH) as f:`
+- cell 26: `VISUAL_MATRIX = np.array([r["embedding"] for r in VISUAL_INDEX], dtype=np.float32)`
+- cell 27: `VISUAL_INTENT = re.compile(r"\b(chart|graph|plot|diagram|visuali[sz]\w*|pictured|illustrat`
+- cell 27: `for group, qs in (("in scope", CAL_IN_SCOPE), ("chart, not indexed", CAL_CHART_NOT_INDEXED`
+- cell 34: `sys.path.insert(0, os.getcwd())`
+- cell 27: `in_scores = [best_visual_match(q)[1] for q in CAL_IN_SCOPE]`
+- cell 27: `out_scores = [best_visual_match(q)[1] for q in CAL_CHART_NOT_INDEXED]`
+- cell 27: `lo_in, hi_out = min(in_scores), max(out_scores)`
+- cell 27: `if lo_in > hi_out:`
+- cell 27: `for q in CAL_NO_KEYWORD:`
+- cell 29: `multihop_graph = build_visual_routed_graph()`

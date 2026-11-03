@@ -1,0 +1,26 @@
+# Allow-list: NOTHING goes into the image unless it is named here. That is how .env, .git, notebooks and
+# your checkpoints stay out by accident-proof design.
+*
+!rag_pipeline
+!serve.py
+!api_layer.py
+!docker_healthcheck.py
+!monitoring.py
+!alert_rules.py
+!notifiers.py
+!watchdog.py
+!requirements.docker.txt
+!requirements.torch.txt
+!day14_visual_index.json
+
+# ...and even inside the allowed folders, leave out:
+**/__pycache__
+**/*.pyc
+**/*.previous
+**/*.before_*
+**/FREEZE_REPORT.md
+**/_parity_expected.json
+**/.env
+**/.env.*
+**/*.pem
+**/*.key

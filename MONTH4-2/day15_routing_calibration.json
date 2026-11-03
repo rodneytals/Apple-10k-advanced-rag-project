@@ -1,0 +1,38 @@
+{
+  "threshold": 0.65,
+  "calibration_in_scope_scores": [
+    0.6935563087463379,
+    0.6882990598678589,
+    0.5567286610603333
+  ],
+  "calibration_not_indexed_scores": [
+    0.6021714806556702,
+    0.62018221616745
+  ],
+  "held_out": [
+    {
+      "question": "Looking at the stock performance graph, did Apple end the five-year period above or below the S&P 500?",
+      "expected": true,
+      "got": true,
+      "score": 0.6709622144699097
+    },
+    {
+      "question": "What does the cumulative return chart in the filing show for Apple's stock?",
+      "expected": true,
+      "got": true,
+      "score": 0.7031311392784119
+    },
+    {
+      "question": "Is there a chart showing Apple's gross margin by product line?",
+      "expected": false,
+      "got": false,
+      "score": 0.6440187692642212
+    },
+    {
+      "question": "What was Apple's total net sales for fiscal year 2024?",
+      "expected": false,
+      "got": false,
+      "score": null
+    }
+  ]
+}

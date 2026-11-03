@@ -1,0 +1,17 @@
+.env
+checkpoints/
+work/
+*.before_concurrency_patch
+*.previous
+__pycache__/
+*.before_container_patch
+.env.before_bom_fix
+.env.before_metrics_key
+*.before_bounded_patch
+backups/
+ntfy_topic.txt
+new_key_*.txt
+alert_test.json
+.env.before_*
+Caddyfile.previous
+run_backup.cmd
